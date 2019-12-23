@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const hbs = require('hbs');
+require('./hbs/helpers');
+
+const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
 
@@ -9,10 +12,9 @@ app.use(express.static(__dirname + '/public'));
  * Express engine HBS
  */
 hbs.registerPartials(__dirname + '/views/partials');
+
 app.set('view engine', 'hbs');
-hbs.registerHelper('getAnio', ()=>{
-    return new Date().getFullYear();
-})
+
 
 /*app.get('/', (req, res) => {
     let salida = {
@@ -27,7 +29,7 @@ hbs.registerHelper('getAnio', ()=>{
 
 app.get('/', (req, res) => {
     res.render('home',{
-        nombre: 'Rafael'
+        nombre: 'Rafael mUnoZ PerEz'
     });
 });
 
@@ -35,6 +37,6 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.listen(8080, () => {
-    console.log('Escuchando desde puerto 8080');
+app.listen(port, () => {
+    console.log(`Escuchando desde puerto ${port}`);
 });
